@@ -8,8 +8,8 @@ const getAll = async (req, res) => {
 };
 
 const getById = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.getContactById(id);
+  const { contactId } = req.params;
+  const result = await contactsService.getContactById(contactId);
   if (!result) {
     throw HttpError(404);
   }
@@ -22,8 +22,8 @@ const add = async (req, res) => {
 };
 
 const updateById = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.updateContact(id, req.body);
+  const { contactId } = req.params;
+  const result = await contactsService.updateContact(contactId, req.body);
   if (!result) {
     throw HttpError(404);
   }
@@ -31,8 +31,8 @@ const updateById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.removeContact(id);
+  const { contactId } = req.params;
+  const result = await contactsService.removeContact(contactId);
   if (!result) {
     throw HttpError(404);
   }
