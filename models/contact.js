@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
-
-const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const phoneRegexp = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+import { emailRegexp, phoneRegexp } from "../constants/contact-constants.js";
+import { handleSaveError, validateAtUpdate } from "./hooks.js";
 
 const contactSchema = new Schema({
     name: {
@@ -23,6 +22,10 @@ const contactSchema = new Schema({
         default: false,
     },
 }, { versionKey: false, timestamps: true });
+
+contactSchema.pre("findOneAndUpdate", validateAtUpdate);
+contactSchema.post("save", handleSaveError);
+contactSchema.post("findOneAndUpdate", handleSaveError);
 
 const Contact = model("contact", contactSchema);
 
