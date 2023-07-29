@@ -6,3 +6,5 @@ import usersSchemas from "../../Schemas/users-schemas.js";
 const authRouter = express.Router();
 
 authRouter.post("/singup", validateBody(usersSchemas.userSignupSchema), authController.singup);
+
+authRouter.post("/singin", validateBody(usersSchemas.userSigninSchema), authController.singin);
