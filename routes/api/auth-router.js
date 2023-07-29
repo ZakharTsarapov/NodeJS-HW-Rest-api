@@ -8,3 +8,6 @@ const authRouter = express.Router();
 authRouter.post("/singup", validateBody(usersSchemas.userSignupSchema), authController.singup);
 
 authRouter.post("/singin", validateBody(usersSchemas.userSigninSchema), authController.singin);
+
+
+export default authRouter;
