@@ -41,11 +41,32 @@ const singin = async (req, res) => {
     };
 
     const token = jwt.sign(payload, JWT_SECRET_KEY, {expiresIn: "23h"});
+    await User.findByIdAndUpdate(user._id, {token});
 
     res.json({ token, })
 }
 
+const getCurrent = (req, res) => {
+   const {name, email} = req.user;
+
+   res.json({
+    name,
+    email,
+   })
+}
+
+const singout = async ( req, res) => {
+    const {_id} = req.user;
+    await User.findByIdAndUpdate(_id, {token: ""});
+    res.json({
+        message: "Singout ssucess"
+    })
+}
+
+
 export default {
     singup: ctrlWrapper(singup),
     singin: ctrlWrapper(singin),
+    getCurrent: ctrlWrapper(getCurrent),
+    singout: ctrlWrapper(singout),
 }
