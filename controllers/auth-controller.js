@@ -3,8 +3,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js"
 import { ctrlWrapper } from "../decorators/index.js";
 import { HttpError } from "../helpers/index.js";
-import "dotenv/config";
+import dotenv from "dotenv";
 
+dotenv.config();
 const {JWT_SECRET_KEY} = process.env;
 
 const singup = async (req, res) => {
@@ -56,7 +57,7 @@ const getCurrent = (req, res) => {
 }
 
 const singout = async ( req, res) => {
-    const {_id} = req.user;
+    const { _id } = req.user;
     await User.findByIdAndUpdate(_id, {token: ""});
     res.json({
         message: "Singout ssucess"
