@@ -14,7 +14,7 @@ contactsRouter.get('/:contactId', isValidId, contactsController.getById)
 
 contactsRouter.post('/', isEmptyBody, validateBody(contactsSchema.addContactsSchema), contactsController.add)
 
-contactsRouter.patch('/:contactId/favorite', isValidId, isEmptyBody, validateBody(contactsSchema.contactUpdateFavoriteSchema), contactsController.updateById)
+contactsRouter.patch('/:contactId/favorite', isValidId, isEmptyBody, validateBody(contactsSchema.contactUpdateFavoriteSchema), contactsController.updateFavorite)
 
 contactsRouter.delete('/:contactId', isValidId, contactsController.deleteById)
 

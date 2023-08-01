@@ -1,6 +1,6 @@
 import {Schema, model} from "mongoose";
 import {handleSaveError, validateAtUpdate} from "./hooks.js";
-import { emailRegexp } from "../constants/user-constants.js";
+import { emailRegexp, subList } from "../constants/user-constants.js";
 
 const userSchema = new Schema ({
     name: {
@@ -24,7 +24,7 @@ const userSchema = new Schema ({
     },
     subscription: {
         type: String,
-        enum: ["starter", "pro", "business"],
+        enum: subList,
         default: "starter",
     },
 }, {versionKey: false, timestamps: true});
