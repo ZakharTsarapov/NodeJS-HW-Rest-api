@@ -50,7 +50,8 @@ const singin = async (req, res) => {
   const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "23h" });
   await User.findByIdAndUpdate(user._id, { token });
 
-  res.json({ token });
+  res.status(200).json({ token, user:{ 
+    email: user.email, subscription: user.subscription } });
 };
 
 const getCurrent = (req, res) => {
@@ -92,7 +93,7 @@ const updateAvatar = async(req, res) => {
   .catch(err => {
     throw err;
   })
-  
+
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.resolve(AvatarDir, filename);
   await fs.rename(tempUpload, resultUpload);
