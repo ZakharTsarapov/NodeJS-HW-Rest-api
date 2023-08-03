@@ -27,6 +27,10 @@ const userSchema = new Schema ({
         enum: subList,
         default: "starter",
     },
+    avatarURL: {
+        type: String,
+        required: true,
+    }
 }, {versionKey: false, timestamps: true});
 
 userSchema.pre("findOneAndUpdate", validateAtUpdate);
