@@ -16,7 +16,7 @@ dotenv.config();
 const { DB_HOST, PORT } = process.env;
 
 describe("login test", () => {
- 
+
   beforeAll(async() => {
    await mongoose
       .connect(DB_HOST)
@@ -36,10 +36,10 @@ describe("login test", () => {
   })
 
   test("res status 200, return token and user object with 2 fileds email and subscription", async() => {
-    const response = await request(app).post("/api/auth/singin", authController.singin).send({ email: "Test@gmail.com", password: "123456"});
-    expect(response.status).toEqual(200);
-    expect(response.body).toHaveProperty("token")
-    expect(response.body).toMatchObject({
+    const res = await request(app).post("/api/auth/singin", authController.singin).send({ email: "Test@gmail.com", password: "123456"});
+    expect(res.status).toEqual(200);
+    expect(res.body).toHaveProperty("token")
+    expect(res.body).toMatchObject({
         user: {
             email: expect.any(String),
             subscription: expect.any(String),
